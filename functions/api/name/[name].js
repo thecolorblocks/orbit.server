@@ -1,10 +1,10 @@
 import config from "../../../config"
 
-const url = config.baseurl + '/name'
+const url = config.snsBaseurl + '/name'
 const init = {
   headers: {
     "content-type": "application/json",
-    "api-key": config.apiKey
+    "api-key": config.snsApiKey
   }
 }
 
