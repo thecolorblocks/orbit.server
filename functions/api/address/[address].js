@@ -13,13 +13,15 @@ export async function onRequestGet(context) {
   const { searchParams } = new URL(context.request.url)
   const limit = searchParams.get('limit') ? searchParams.get('limit') : 24
   const offset = searchParams.get('offset') ? searchParams.get('offset') : 0
+  const orderby = searchParams.get('order_by') ? searchParams.get('order_by') : 'number'
+  const order = searchParams.get('order') ? searchParams.get('order') : 'asc'
   const filetype = searchParams.get('filetype')
   let requestUrl = ''
 
   if (!Object.keys(media).includes(filetype)) {
-    requestUrl = url + `?address=${address}&limit=${limit}&offset${offset}`
+    requestUrl = url + `?address=${address}&limit=${limit}&offset${offset}&order_by=${orderby}&order=${order}`
   } else {
-    requestUrl = url + `?address=${address}&limit=${limit}&offset${offset}&mime_type=${media[filetype].join(',')}`
+    requestUrl = url + `?address=${address}&limit=${limit}&offset${offset}&order_by=${orderby}&order=${order}&mime_type=${media[filetype].join(',')}`
   }
 
   const response = await fetch(requestUrl, init)
